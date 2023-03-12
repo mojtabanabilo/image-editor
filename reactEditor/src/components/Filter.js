@@ -1,31 +1,64 @@
 import React, {useState} from 'react';
 import Grid from '@mui/material/Grid';
-import { Container } from '@mui/system';
+import Box from '@mui/material/Box';
+import { Container } from '@mui/material';
+import Slider from '@mui/material/Slider';
+import Button from '@mui/material/Button';
+import { height } from '@mui/system';
+
+
 
 const Filter = () => {
     const [image, setImage] = useState(null);
-    image && console.log(URL.createObjectURL(image));
+    image && console.log(image);
     return (
         <>
-            {/* {
-                image && <img alt="not found" width={"250px"} src={URL.createObjectURL(image)}/>
-            }
-            <input type="file" onChange={(event) => {setImage(event.target.files[0])}}/>
-            <button onClick={() => setImage(null)}>Remove</button> */}
-            {
-                image && <img className='show-img' src={URL.createObjectURL(image)}/>
-            }            
-            <Grid container spacing={3}>
-                <Grid item xs={4}>
-                    <input type="range"/>
-                </Grid>
-                <Grid item xs={4}>
-                    <input type="range"/>
-                </Grid>
-                <Grid item xs={4}>
-                    <input type="range"/>
-                </Grid>
-            </Grid>
+            <Container maxWidth='lg' sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+                <Container>
+                    <Box maxWidth={200}>
+                        <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />
+                    </Box>                
+                    <Box  maxWidth={200}>
+                        <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />
+                    </Box>
+                    <Box  maxWidth={200}>
+                        <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />
+                    </Box>                
+                </Container>
+                <Container>
+                    <Box sx={{
+                        width: 300,
+                        height: 400
+                    }}>
+                        {
+                            image && <img 
+                                src={URL.createObjectURL(image)} 
+                                alt="user data"
+                                style={{width: "inherit", height: "inherith"}}
+                            />
+                        }
+                    </Box>
+                </Container>
+                <Container>
+                    <Box>
+                        <Button variant="contained">
+                            <label htmlFor="input-file">
+                                upload image
+                            </label>
+                            <input 
+                                type="file"
+                                id="input-file" 
+                                style={{display: "none"}} 
+                                onChange={e => {setImage(e.target.files[0])}}
+                            />
+                        </Button>
+                    </Box>
+                </Container>
+            </Container>
         </>
     );
 };
